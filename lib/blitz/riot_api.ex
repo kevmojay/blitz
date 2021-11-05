@@ -157,6 +157,6 @@ defmodule Blitz.RiotAPI do
       |> Enum.map(&Task.await(&1))
       |> Enum.map(fn match -> Blitz.RiotAPI.get_list_of_participant_summoners(match) end)
       |> List.flatten()
-      |> Enum.uniq()
+      |> Enum.uniq_by(fn participant -> participant.puuid end)
   end
 end
